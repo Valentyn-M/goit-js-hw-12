@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+@import url('izitoast/dist/css/iziToast.min.css');
+
+/* ========================================================================================================================== */
+
+body {
+	font-family: "Montserrat", sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 1.5;
+	letter-spacing: 0.04em;
+	color: #2e2f42;
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+/* #region iziToast */
+
+.iziToast {
+	font-family: "Montserrat", sans-serif;
+	letter-spacing: 0.03em;
+	border-radius: 4px;
+	box-shadow: none;
+	overflow: hidden;
+	max-width: 432px;
+}
+
+.iziToast:after {
+	display: none;
+}
+
+.iziToast>.iziToast-close {
+	background-image: url("../img/close.svg");
+	background-size: 16px;
+	opacity: .8;
+	transition: opacity 0.3s ease 0s;
+}
+
+.iziToast.error>.iziToast-progressbar {
+	background-color: #ffbebe;
+}
+
+.iziToast.success>.iziToast-progressbar {
+	background-color: #b5ea7c;
+}
+
+.iziToast.caution>.iziToast-progressbar {
+	background-color: #bb7b10;
+}
+
+/* #endregion */
