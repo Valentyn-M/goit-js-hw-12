@@ -2,16 +2,46 @@ import { showGallery } from "./js/render-functions"
 import { getImagesPixabay } from "./js/pixabay-api"
 import iziToast from "izitoast";
 
+let searchRequest;
+
+// Show images via form
 const searchForm = document.querySelector(".search-form");
 searchForm.addEventListener("submit", (event) => {
 	event.preventDefault();
 
+	// Get Search request
 	const inputSearch = searchForm.elements.search;
 	const inputSearchValue = inputSearch.value.trim();
 
-	// If the search request is empty
-	if (inputSearchValue === "") {
-		return iziToast.show({
+	// If this is the same Search request
+	if (inputSearchValue === searchRequest) {
+		return iziToast.warning({
+			class: "caution",
+			titleColor: "#fff",
+			titleSize: "16px",
+			titleLineHeight: "1.5",
+			message: "Results for this Search query are already shown",
+			backgroundColor: "#ffa000",
+			color: "white",
+			messageColor: "#fff",
+			messageSize: "16px",
+			messageLineHeight: "1.5",
+			iconUrl: new URL("./img/alert.svg", import.meta.url).href,
+			iconColor: "#fff",
+			close: true,
+			closeOnEscape: true,
+			progressBarColor: "#ffe0ac",
+			position: "topLeft",
+			timeout: 2500,
+			animateInside: false,
+			transitionIn: "bounceInRight"
+		});
+	}
+	searchRequest = inputSearchValue;
+
+	// If the Search request is empty
+	if (searchRequest === "") {
+		return iziToast.warning({
 			class: "caution",
 			titleColor: "#fff",
 			titleSize: "16px",
@@ -34,7 +64,34 @@ searchForm.addEventListener("submit", (event) => {
 		});
 	}
 
-	getImagesPixabay(inputSearchValue).then((images) => {
-		showGallery(images)
-	});
+	// Get images
+	getImagesPixabay(searchRequest, true).then((images) => {
+		// Show images
+		showGallery(images, true);
+	})
+})
+
+// Show images via Button "Load more"
+const loadMoreBtn = document.querySelector(".gallery__btn-more");
+loadMoreBtn.addEventListener("click", () => {
+	// Get images
+	getImagesPixabay(searchRequest, false).then((images) => {
+		// If there is no data
+		if (!images) {
+			return;
+		}
+
+		// Show images
+		showGallery(images, false);
+
+		// Page scrolling
+		const galleryElement = document.querySelector(".gallery__item");
+		const hightGalleryElement = galleryElement.getBoundingClientRect().height;
+
+		window.scrollBy({
+			top: (hightGalleryElement * 2),
+			left: 0,
+			behavior: "smooth",
+		});
+	})
 })

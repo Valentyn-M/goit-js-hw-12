@@ -59,31 +59,11 @@
 	color: #000;
 }
 
-.search-form__btn {
-	border-radius: 8px;
-	padding: 8px 16px;
-	height: 40px;
-	width: 91px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: #4e75ff;
-	color: #fff;
-	font-weight: 500;
-	transition: background-color 0.3s ease 0s;
-	outline: none;
-}
-
-.search-form__btn:hover,
-.search-form__btn:focus {
-	background-color: #6c8cff;
-}
-
 /* #endregion */
 
 /* #region gallery images */
 
-.gallery {
+.gallery__list {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -147,7 +127,7 @@
 }
 
 @media (min-width: 480px) {
-	.gallery {
+	.gallery__list {
 		flex-direction: row;
 		gap: 20px;
 		flex-wrap: wrap;
@@ -159,7 +139,7 @@
 }
 
 @media (min-width: 768px) {
-	.gallery {
+	.gallery__list {
 		gap: 24px;
 		max-width: 1176px;
 	}
@@ -195,36 +175,40 @@
 
 /* #endregion */
 
-/* #region css-loader */
+/* #region Button Load more */
 
-.loader__overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
+.gallery__btn-more {
+	display: none;
+}
+
+.gallery__btn-more._active {
+	display: flex;
+}
+
+/* #endregion */
+
+/* #region css-loader */
+/* https://github.com/vineethtrv/css-loader */
+
+.gallery__loader-overlay {
 	width: 100%;
 	height: 100%;
-	background: rgba(46, 47, 66, 0.8);
+	/* background: rgba(46, 47, 66, 0.8); */
 	z-index: 999;
-	opacity: 0;
-	visibility: hidden;
-	pointer-events: none;
-	transition: opacity .5s cubic-bezier(0.4, 0, 0.2, 1), visibility .5s cubic-bezier(0.4, 0, 0.2, 1);
+	display: none;
+}
+
+.gallery__loader-overlay._active {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.loader__overlay.active {
-	opacity: 1;
-	visibility: visible;
-	pointer-events: auto;
-}
-
-.loader {
+.gallery__loader {
 	width: 48px;
 	height: 48px;
-	border: 5px solid #FFF;
-	border-bottom-color: #4e75ff;
+	border: 5px solid #4e75ff;
+	border-bottom-color: transparent;
 	border-radius: 50%;
 	display: inline-block;
 	box-sizing: border-box;

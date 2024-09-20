@@ -1,13 +1,17 @@
 import SimpleLightbox from "simplelightbox";
 import iziToast from "izitoast";
 
-export const showGallery = (images) => {
-	const galleryList = document.querySelector(".gallery");
-	galleryList.innerHTML = "";
+const galleryList = document.querySelector(".gallery__list");
+
+export const showGallery = (images, isNewSearchRequest) => {
+	// Check if this is a new Search Request
+	if (isNewSearchRequest) {
+		galleryList.innerHTML = "";
+	}
 
 	// If no images were found
 	if (images.length === 0) {
-		return iziToast.show({
+		return iziToast.error({
 			class: "error",
 			titleColor: "#fff",
 			titleSize: "16px",
@@ -30,6 +34,7 @@ export const showGallery = (images) => {
 		});
 	}
 
+	// Build gallery
 	galleryList.insertAdjacentHTML("beforeend", generateGalleryItems(images));
 	function generateGalleryItems(images) {
 		return images.map(image => {
@@ -70,6 +75,7 @@ export const showGallery = (images) => {
 
 	// ==========================================================================================================================
 
+	// Enlarge image
 	let gallery = new SimpleLightbox(".gallery__link", {
 		captions: true,
 		captionSelector: ".gallery__image",

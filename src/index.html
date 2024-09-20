@@ -14,17 +14,19 @@
 	<div class="gallery__wrap">
 
 		<form class="search-form">
-			<label class="search-form__label visually-hidden" for="search">Search</label>
+			<label class="search-form__label visually-hidden" for="input-search">Search</label>
 			<input class="search-form__input" id="input-search" name="search" type="text" placeholder="Search images...">
-			<button class="search-form__btn" type="submit">Search</button>
+			<button class="search-form__btn primary-btn" type="submit">Search</button>
 		</form>
 
-		<ul class="gallery"></ul>
+		<ul class="gallery__list"></ul>
 
-	</div>
+		<button class="gallery__btn-more primary-btn" type="button">Load more</button>
 
-	<div class="loader__overlay">
-		<span class="loader"></span>
+		<div class="gallery__loader-overlay">
+			<span class="gallery__loader"></span>
+		</div>
+
 	</div>
 
 	<script type="module" src="./main.js"></script>
