@@ -75,11 +75,12 @@ body {
 }
 
 .iziToast.caution>.iziToast-progressbar {
-	background-color: #bb7b10;
+	background-color: #ffe0ac;
 }
 
 .iziToast.info>.iziToast-progressbar {
-	background-color: #0071bd;
+	/* background-color: #0071bd; */
+	background-color: #b8e3ff;
 }
 
 /* #endregion */

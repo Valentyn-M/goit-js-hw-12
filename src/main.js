@@ -30,7 +30,7 @@ searchForm.addEventListener("submit", (event) => {
 			iconColor: "#fff",
 			close: true,
 			closeOnEscape: true,
-			progressBarColor: "#ffe0ac",
+			progressBarColor: "#bb7b10",
 			position: "topRight",
 			timeout: 3000,
 			animateInside: false,
@@ -52,11 +52,6 @@ const loadMoreBtn = document.querySelector(".gallery__btn-more");
 loadMoreBtn.addEventListener("click", () => {
 	// Get images
 	getImagesPixabay(searchRequest, false).then((images) => {
-		// If there is no data
-		if (!images) {
-			return;
-		}
-
 		// Show images
 		showGallery(images, false);
 

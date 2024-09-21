@@ -35,10 +35,10 @@ export const getImagesPixabay = async (searchRequest, isNewSearchRequest) => {
 		const totalPages = Math.ceil(responseData.totalHits / resultPerPage); // totalHits - total number of images (maximum 500)
 
 		// Check the end of the collection to display an Alert
-		if (totalPages > 0 && pageNumber >= totalPages) {
-			loadMoreBtn.classList.remove("_active");
+		if (pageNumber >= totalPages && totalPages > 0) {
+			loadMoreBtn.classList.remove("_active");;
 			loader.classList.remove("_active");
-			return iziToast.info({
+			iziToast.info({
 				class: "info",
 				titleColor: "#fff",
 				titleSize: "16px",
@@ -53,7 +53,7 @@ export const getImagesPixabay = async (searchRequest, isNewSearchRequest) => {
 				iconColor: "#fff",
 				close: true,
 				closeOnEscape: true,
-				progressBarColor: "#b8e3ff",
+				progressBarColor: "#0071bd",
 				position: "topRight",
 				timeout: 4000,
 				animateInside: false,
@@ -64,14 +64,14 @@ export const getImagesPixabay = async (searchRequest, isNewSearchRequest) => {
 		// Hide loader
 		loader.classList.remove("_active");
 
+		// Show button "Load more" after first request
+		if (totalPages > 1 && totalPages > pageNumber) {
+			loadMoreBtn.classList.add("_active");
+		}
+
 		// Increase the group number
 		if (totalPages > 1) {
 			pageNumber += 1;
-		}
-
-		// Show button "Load more" after first request
-		if (pageNumber > 1) {
-			loadMoreBtn.classList.add("_active");
 		}
 
 		return responseData.hits; // return array of objects with images
