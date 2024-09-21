@@ -78,4 +78,8 @@ body {
 	background-color: #bb7b10;
 }
 
+.iziToast.info>.iziToast-progressbar {
+	background-color: #0071bd;
+}
+
 /* #endregion */

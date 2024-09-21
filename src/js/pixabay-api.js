@@ -35,27 +35,27 @@ export const getImagesPixabay = async (searchRequest, isNewSearchRequest) => {
 		const totalPages = Math.ceil(responseData.totalHits / resultPerPage); // totalHits - total number of images (maximum 500)
 
 		// Check the end of the collection to display an Alert
-		if (totalPages > 0 && pageNumber > totalPages) {
+		if (totalPages > 0 && pageNumber >= totalPages) {
 			loadMoreBtn.classList.remove("_active");
 			loader.classList.remove("_active");
-			return iziToast.error({
-				class: "error",
+			return iziToast.info({
+				class: "info",
 				titleColor: "#fff",
 				titleSize: "16px",
 				titleLineHeight: "1.5",
-				message: "We're sorry, but you've reached the end of search results.",
-				backgroundColor: "#ef4040",
+				message: "We're sorry, but you've reached the end of search results",
+				backgroundColor: "#09f",
 				color: "white",
 				messageColor: "#fff",
 				messageSize: "16px",
 				messageLineHeight: "1.5",
-				iconUrl: new URL("../img/error.svg", import.meta.url).href,
+				iconUrl: new URL("../img/bell.svg", import.meta.url).href,
 				iconColor: "#fff",
 				close: true,
 				closeOnEscape: true,
-				progressBarColor: "#b51b1b",
+				progressBarColor: "#b8e3ff",
 				position: "topRight",
-				timeout: 5000,
+				timeout: 4000,
 				animateInside: false,
 				transitionIn: "bounceInLeft"
 			});
@@ -79,6 +79,30 @@ export const getImagesPixabay = async (searchRequest, isNewSearchRequest) => {
 	catch (error) {
 		// Блок коду для обробки помилок, що виникли у блоці try
 		console.log(error);
+		// При виникнені непередбаченої помилки (наприклад зник інтернет) потрібно сповіщати кристувача
+		iziToast.error({
+			class: "error",
+			titleColor: "#fff",
+			titleSize: "16px",
+			titleLineHeight: "1.5",
+			message: `Something went wrong.<br> ${error}`,
+			backgroundColor: "#ef4040",
+			color: "white",
+			messageColor: "#fff",
+			messageSize: "16px",
+			messageLineHeight: "1.5",
+			iconUrl: new URL("../img/error.svg", import.meta.url).href,
+			iconColor: "#fff",
+			close: true,
+			closeOnEscape: true,
+			progressBarColor: "#b51b1b",
+			position: "topRight",
+			timeout: 5000,
+			animateInside: false,
+			transitionIn: "bounceInLeft"
+		});
+		// Hide loader
+		loader.classList.remove("_active");
 	}
 }
 
