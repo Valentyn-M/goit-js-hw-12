@@ -1,6 +1,6 @@
 # Image Search
 
-![Image Search](./preview.jpg)
+![Image Search](./preview.png)
 
 Image Search is a lightweight image search web application powered by the Pixabay API. It fetches images via Axios using async/await, displays results in a gallery (15 images per request), supports pagination via a “Load more” button, and provides a smooth viewing experience with SimpleLightbox and toast notifications via iziToast. Built with Vite.
 
